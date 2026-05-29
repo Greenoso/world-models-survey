@@ -1,6 +1,6 @@
 # World Models — Literature Review Notes
 
-Companion to `world-models-survey.html`. A neutral landscape of the world-model literature, assembled to scope the **Tiny World Models for Academic-Scale Training** project. Every numeric figure was verified against the primary source (arXiv / official page); `n/r` = not reported in the primary source. Industrial systems with blog-only disclosure are flagged.
+Companion to `index.html` (the reveal.js slide deck). A neutral landscape of the world-model literature, assembled to scope the **Tiny World Models for Academic-Scale Training** project. Every numeric figure was verified against the primary source (arXiv / official page); `n/r` = not reported in the primary source. Industrial systems with blog-only disclosure are flagged.
 
 ---
 

@@ -4,349 +4,263 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>World Models — A Literature Landscape</title>
+<!-- reveal.js (vendored locally, relative links — works offline) -->
+<link rel="stylesheet" href="reveal/reset.css"/>
+<link rel="stylesheet" href="reveal/reveal.css"/>
 <style>
 :root{
-  --bg:#0d1117; --bg2:#111826; --panel:#161e2e; --panel2:#1b2436;
-  --ink:#e8edf6; --mut:#9aa7bd; --dim:#6b7892; --line:#27314a;
-  --acc:#6ea8fe; --acc2:#9d7bff; --ok:#46d39a; --warn:#f5a35c; --hot:#ff6b8b;
+  --bg:#ffffff; --panel:#f6f8fc; --panel2:#eef2fa; --ink:#16203a; --mut:#42506b;
+  --dim:#7986a0; --line:#dde4f1; --acc:#2f6df0; --acc2:#7a4dff; --ok:#0f9d6b;
+  --warn:#c2701c; --hot:#d8345b;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
-html[data-theme="light"]{
-  --bg:#f4f6fb; --bg2:#eef1f8; --panel:#ffffff; --panel2:#f7f9fe;
-  --ink:#16203a; --mut:#48566f; --dim:#7a86a0; --line:#dde3f0;
-  --acc:#2f6df0; --acc2:#7a4dff; --ok:#119d6b; --warn:#c9711f; --hot:#d83a5e;
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:var(--sans);
-  -webkit-font-smoothing:antialiased;overflow:hidden}
-#deck{position:fixed;inset:0}
-.slide{position:absolute;inset:0;display:none;flex-direction:column;
-  padding:4.2vh 5.2vw 6vh;overflow:hidden;animation:fade .35s ease}
-.slide.active{display:flex}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--acc);margin:0 0 .6rem;font-weight:600}
-h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.04;margin:.2rem 0 .4rem;font-weight:800;letter-spacing:-.02em}
-h2{font-size:clamp(1.5rem,3.3vw,2.5rem);line-height:1.08;margin:.1rem 0 1.1rem;font-weight:750;letter-spacing:-.015em}
-h2 .em{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
-p{margin:.35rem 0;color:var(--mut);font-size:1.02rem;line-height:1.5}
-.lead{font-size:1.18rem;color:var(--ink);max-width:62ch}
-b,strong{color:var(--ink);font-weight:700}
-.sub{color:var(--mut)}
-ul{margin:.3rem 0;padding-left:1.1rem}
-li{margin:.32rem 0;color:var(--mut);line-height:1.45;font-size:1.0rem}
-li b{color:var(--ink)}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;flex:1;min-height:0}
-.cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.1rem;flex:1;min-height:0}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;min-height:0}
-.card h3{margin:.1rem 0 .55rem;font-size:1.05rem;color:var(--ink);display:flex;align-items:center;gap:.5rem}
-.card.kpi{display:flex;flex-direction:column;justify-content:center}
-.tag{display:inline-block;font-family:var(--mono);font-size:.72rem;padding:.16rem .5rem;border-radius:999px;
-  border:1px solid var(--line);color:var(--mut);background:var(--panel2);white-space:nowrap}
-.tag.b{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 45%,var(--line))}
-.tag.g{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,var(--line))}
-.tag.p{color:var(--acc2);border-color:color-mix(in srgb,var(--acc2) 45%,var(--line))}
-.tag.w{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,var(--line))}
-.dot{width:.55rem;height:.55rem;border-radius:50%;display:inline-block}
-table{width:100%;border-collapse:collapse;font-size:.86rem}
-th,td{text-align:left;padding:.42rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--dim);font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-tbody tr:nth-child(odd){background:color-mix(in srgb,var(--panel) 55%,transparent)}
-td b{color:var(--ink)}
+.reveal{font-family:var(--sans);font-size:30px;color:var(--ink);background:var(--bg)}
+.reveal .slides{text-align:left}
+.reveal .slides section{top:0 !important;padding:8px 14px}
+.reveal h1,.reveal h2,.reveal h3{color:var(--ink);text-transform:none;letter-spacing:-.02em;font-weight:800;margin:0}
+.reveal h1{font-size:2.2em;line-height:1.05}
+.reveal h2{font-size:1.45em;line-height:1.1;margin-bottom:.5em}
+.reveal h3{font-size:.7em;font-weight:700}
+.reveal p{font-size:.62em;line-height:1.45;color:var(--mut);margin:.3em 0}
+.reveal .em{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.reveal b,.reveal strong{color:var(--ink)}
+.reveal a{color:var(--acc);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--acc) 35%,transparent)}
+.reveal a:hover{color:var(--acc2)}
+.kicker{font-family:var(--mono);font-size:.4em;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:.5em !important}
+.lead{font-size:.72em !important;color:var(--ink) !important;max-width:30ch}
+.reveal ul{font-size:.6em;margin:.2em 0 .2em 1em}
+.reveal li{margin:.28em 0;line-height:1.4;color:var(--mut)}
+.reveal li b{color:var(--ink)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card h3{margin-bottom:.5em;display:flex;align-items:center;gap:8px;font-size:.62em}
+.card p{font-size:.52em;margin:.25em 0}
+.card ul{font-size:.52em}
+.tag{display:inline-block;font-family:var(--mono);font-size:.38em;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--mut);background:#fff;margin:2px 2px 0 0;white-space:nowrap}
+.tag.b{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 40%,var(--line))}
+.tag.g{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
+.tag.p{color:var(--acc2);border-color:color-mix(in srgb,var(--acc2) 40%,var(--line))}
+.tag.w{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 40%,var(--line))}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.reveal table{width:100%;border-collapse:collapse;font-size:.42em;margin:0}
+.reveal table th,.reveal table td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.reveal table th{color:var(--dim);font-family:var(--mono);font-size:.85em;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+.reveal tbody tr:nth-child(odd){background:color-mix(in srgb,var(--panel) 60%,transparent)}
+.reveal table td b{color:var(--ink)}
+.reveal table a{font-weight:700;border-bottom:none}
 .mono{font-family:var(--mono)}
-.small{font-size:.82rem;color:var(--dim)}
-.note{font-size:.8rem;color:var(--dim);margin-top:.6rem;border-left:2px solid var(--line);padding-left:.7rem}
-/* progress + chrome */
-#bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--acc),var(--acc2));
-  width:0;z-index:50;transition:width .3s ease}
-#hud{position:fixed;bottom:1.1vh;right:1.4vw;font-family:var(--mono);font-size:.74rem;color:var(--dim);z-index:50}
-#hud b{color:var(--mut)}
-#brand{position:fixed;bottom:1.1vh;left:1.4vw;font-family:var(--mono);font-size:.72rem;color:var(--dim);z-index:50}
-.hint{position:fixed;bottom:1.1vh;left:50%;transform:translateX(-50%);font-family:var(--mono);
-  font-size:.7rem;color:var(--dim);z-index:50;opacity:.85}
-/* timeline */
-.tl{display:flex;gap:0;align-items:stretch;margin-top:.4rem;flex-wrap:wrap}
-.tl .step{flex:1;min-width:150px;position:relative;padding:0 .5rem}
-.tl .yr{font-family:var(--mono);color:var(--acc);font-weight:700;font-size:.9rem}
-.tl .ti{color:var(--ink);font-weight:650;font-size:.95rem;margin:.15rem 0}
-.tl .tx{color:var(--mut);font-size:.82rem;line-height:1.35}
-.tl .step:not(:last-child)::after{content:"→";position:absolute;right:-.4rem;top:0;color:var(--dim)}
-/* axis bars */
-.axis{display:grid;grid-template-columns:auto 1fr;gap:.55rem 1rem;align-items:center;margin-top:.3rem}
-.axis .lab{font-family:var(--mono);font-size:.8rem;color:var(--ink);font-weight:600}
-.axrow{position:relative;background:var(--panel2);border:1px solid var(--line);border-radius:999px;height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 .8rem;font-size:.78rem;color:var(--mut)}
-.axrow .pole{z-index:2}
-.axrow .ex{color:var(--dim);font-family:var(--mono);font-size:.68rem}
+.note{font-size:.46em;color:var(--dim);margin-top:.7em;border-left:3px solid var(--acc);padding-left:10px;background:var(--panel2);border-radius:0 6px 6px 0;padding:8px 10px}
+.note b{color:var(--ink)}
+.fix{border-left-color:var(--ok)}
+.flex{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+/* lineage */
+.tl{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:14px}
+.tl .step{position:relative}
+.tl .yr{font-family:var(--mono);color:var(--acc);font-weight:700;font-size:.5em}
+.tl .ti{color:var(--ink);font-weight:700;font-size:.5em;margin:2px 0}
+.tl .tx{color:var(--mut);font-size:.4em;line-height:1.3}
+/* axis */
+.axis{display:grid;grid-template-columns:auto 1fr;gap:9px 14px;align-items:center;margin-top:6px}
+.axis .lab{font-family:var(--mono);font-size:.46em;color:var(--ink);font-weight:700}
+.axrow{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px;display:flex;justify-content:space-between;font-size:.44em;color:var(--mut)}
+.axrow .ex{color:var(--dim);font-family:var(--mono);font-size:.82em;display:block}
+.axrow.fixed{border-color:color-mix(in srgb,var(--ok) 45%,var(--line));background:color-mix(in srgb,var(--ok) 7%,#fff)}
+/* objective families */
+.fam{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.fam .f{display:grid;grid-template-columns:230px 1fr;gap:14px;padding:7px 4px;border-bottom:1px solid var(--line);align-items:start}
+.fam .f .h{font-weight:700;color:var(--ink);font-size:.5em}
+.fam .f .h small{display:block;font-family:var(--mono);font-size:.78em;color:var(--acc);font-weight:500;margin-top:2px}
+.fam .f .d{color:var(--mut);font-size:.46em;line-height:1.4}
+.fam .f .d code{font-family:var(--mono);background:var(--panel2);padding:1px 5px;border-radius:4px;color:var(--ink);font-size:.95em}
 /* cost chart */
-.chart{margin-top:.6rem;display:flex;flex-direction:column;gap:.5rem;flex:1;min-height:0;justify-content:center}
-.crow{display:grid;grid-template-columns:230px 1fr;gap:.8rem;align-items:center}
-.crow .nm{font-size:.9rem;color:var(--ink);font-weight:600}
-.crow .nm small{display:block;color:var(--dim);font-family:var(--mono);font-size:.7rem;font-weight:400}
-.track{position:relative;height:30px;background:var(--panel2);border:1px solid var(--line);border-radius:7px;overflow:hidden}
-.fill{position:absolute;left:0;top:0;bottom:0;border-radius:7px 0 0 7px;
-  background:linear-gradient(90deg,color-mix(in srgb,var(--acc) 75%,transparent),color-mix(in srgb,var(--acc2) 75%,transparent));
-  display:flex;align-items:center;justify-content:flex-end;padding-right:.5rem;font-family:var(--mono);font-size:.72rem;color:#fff;min-width:fit-content}
-html[data-theme="light"] .fill{color:#fff}
-.fill.tiny{background:linear-gradient(90deg,color-mix(in srgb,var(--ok) 80%,transparent),color-mix(in srgb,var(--acc) 70%,transparent))}
-.fill.ind{background:linear-gradient(90deg,color-mix(in srgb,var(--acc2) 75%,transparent),color-mix(in srgb,var(--hot) 75%,transparent))}
-.scale{display:grid;grid-template-columns:230px 1fr;gap:.8rem;color:var(--dim);font-family:var(--mono);font-size:.7rem;margin-top:.2rem}
+.chart{display:flex;flex-direction:column;gap:9px;margin-top:10px}
+.crow{display:grid;grid-template-columns:260px 1fr;gap:14px;align-items:center}
+.crow .nm{font-size:.5em;color:var(--ink);font-weight:700}
+.crow .nm small{display:block;color:var(--dim);font-family:var(--mono);font-size:.78em;font-weight:400}
+.track{position:relative;height:26px;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.fill{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-family:var(--mono);font-size:.4em;color:#fff;font-weight:600}
+.fill.tiny{background:linear-gradient(90deg,var(--ok),var(--acc))}
+.fill.ind{background:linear-gradient(90deg,var(--acc2),var(--hot))}
+.scale{display:grid;grid-template-columns:260px 1fr;gap:14px;color:var(--dim);font-family:var(--mono);font-size:.4em;margin-top:4px}
 .scale .ticks{display:flex;justify-content:space-between}
-/* family rows */
-.fam{display:flex;flex-direction:column;gap:.55rem}
-.fam .f{display:grid;grid-template-columns:210px 1fr;gap:1rem;align-items:start;padding:.55rem .2rem;border-bottom:1px solid var(--line)}
-.fam .f .h{font-weight:700;color:var(--ink);font-size:.98rem}
-.fam .f .h small{display:block;font-family:var(--mono);font-size:.72rem;color:var(--acc);font-weight:500;margin-top:.15rem}
-.fam .f .d{color:var(--mut);font-size:.9rem;line-height:1.4}
-.fam .f .d code{font-family:var(--mono);font-size:.82rem;color:var(--ink);background:var(--panel2);padding:.05rem .3rem;border-radius:4px}
-.center{flex:1;display:flex;flex-direction:column;justify-content:center}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
-.refs{columns:2;column-gap:2rem;font-size:.78rem;color:var(--mut);line-height:1.4}
-.refs p{margin:.2rem 0;break-inside:avoid}
-.refs .mono{color:var(--acc);font-size:.72rem}
-.flex{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.4rem}
-.bignum{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.02em}
-.bignum.acc{color:var(--acc)}.bignum.p{color:var(--acc2)}.bignum.ok{color:var(--ok)}
-#help{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 88%,transparent);z-index:99;display:none;
-  align-items:center;justify-content:center}
-#help.on{display:flex}
-#help .box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.4rem 1.8rem;font-family:var(--mono);font-size:.85rem;color:var(--mut)}
-#help kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:.1rem .45rem;color:var(--ink);margin-right:.3rem}
-#help .box div{margin:.4rem 0}
-@media print{.slide{display:flex !important;position:relative;page-break-after:always;height:100vh}#bar,#hud,#brand,.hint{display:none}}
-@media (max-width:820px){.cols,.cols3,.crow,.fam .f,.scale,.refs{grid-template-columns:1fr;columns:1}.tl .step::after{display:none}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:4px}
+.grid2 .card p{font-size:.5em}
+.refs{columns:2;column-gap:24px;font-size:.42em;color:var(--mut);line-height:1.45;margin-top:6px}
+.refs p{margin:2px 0;break-inside:avoid}
+.bignum{font-size:1.4em;font-weight:800;color:var(--ink);line-height:1}
+.bignum.ok{color:var(--ok)}.bignum.p{color:var(--acc2)}
+.reveal .slide-number{background:transparent;color:var(--dim);font-family:var(--mono);font-size:14px}
+.center{display:flex;flex-direction:column;justify-content:center;height:100%}
+.foot{font-family:var(--mono);font-size:.4em;color:var(--dim);margin-top:1em}
 </style>
 </head>
 <body>
-<div id="bar"></div>
-<div id="deck">
+<div class="reveal"><div class="slides">
 
 <!-- 1 TITLE -->
-<section class="slide active" data-note="Title. Frame: this is a neutral landscape of the world-model literature to decide what a 'tiny world model' project should target.">
+<section data-note="Neutral landscape of the world-model literature, assembled to scope the Tiny World Models project. ~10 min. All figures verified against primary sources; suspect taxonomy claim corrected.">
   <div class="center">
-    <p class="kicker">Literature Landscape · Machine Learning</p>
-    <h1>World Models</h1>
-    <p class="lead" style="font-size:1.35rem;color:var(--ink);font-weight:600;margin-top:.2rem">
-      Terminology · Taxonomy · Objectives · Inputs/Outputs · Notable Models · Training &amp; Inference Cost</p>
-    <p class="lead" style="margin-top:1rem">A survey to scope the <b>Tiny World Models for Academic-Scale Training</b> project —
-      mapping the field from single-GPU latent models to billion-parameter neural simulators.</p>
-    <div class="flex" style="margin-top:1.6rem">
+    <p class="kicker">Literature Landscape · Group Meeting</p>
+    <h1>World&nbsp;Models</h1>
+    <p class="lead" style="font-weight:700;margin-top:.3em">Taxonomy · Objectives · Inputs/Outputs · Notable Models · Costs</p>
+    <p class="lead" style="margin-top:.6em">A survey to scope <b>Tiny World Models for Academic-Scale Training</b> — from single-GPU latent models to billion-parameter neural simulators.</p>
+    <div class="flex" style="margin-top:18px">
       <span class="tag b">Model-based RL</span>
       <span class="tag p">Generative / neural game engines</span>
       <span class="tag g">Representation (JEPA) models</span>
     </div>
-    <p class="small" style="margin-top:1.8rem">Supervisor: Zhiqiang Shen (MBZUAI) · Prepared May 2026 · ~15&nbsp;min ·
-      <span class="mono">all figures verified against primary sources</span></p>
+    <p class="foot">Supervisor: Zhiqiang Shen (MBZUAI) · May 2026 · figures verified vs. primary sources · <a href="world-models-notes.md">full notes &amp; references →</a></p>
   </div>
 </section>
 
-<!-- 2 WHAT IS A WM -->
-<section class="slide" data-note="Definition + lineage. Key point: 'world model' is an old idea (Craik, Schmidhuber, Sutton) that recently fused with deep generative models.">
+<!-- 2 DEFINITION + LINEAGE -->
+<section data-note="A world model predicts how the environment evolves. Old idea (Craik, Schmidhuber, Sutton) recently fused with deep generative models. Terms differ by community.">
   <p class="kicker">01 · Definition &amp; Lineage</p>
   <h2>What is a <span class="em">world model</span>?</h2>
-  <p class="lead">A learned internal model that predicts how an environment evolves — given the current state
-    (and optionally an action), it predicts future <b>states, observations, and/or rewards</b> — used for
-    <b>planning, control, imagination, or simulation</b>.</p>
-  <div class="tl" style="margin-top:1.4rem">
-    <div class="step"><div class="yr">1943</div><div class="ti">Craik</div><div class="tx">Mind carries a "small-scale model" of reality to anticipate events.</div></div>
-    <div class="step"><div class="yr">1990</div><div class="ti">Schmidhuber</div><div class="tx">Recurrent "model network" predicts future sensations → makes the world differentiable.</div></div>
-    <div class="step"><div class="yr">1991</div><div class="ti">Sutton · Dyna</div><div class="tx">Plan by "trying things in your head" using a learned model.</div></div>
-    <div class="step"><div class="yr">2018</div><div class="ti">Ha &amp; Schmidhuber</div><div class="tx">V–M–C (VAE + MDN-RNN + controller); train a policy <b>inside a dream</b>.</div></div>
-    <div class="step"><div class="yr">2022</div><div class="ti">LeCun · JEPA</div><div class="tx">Predict in <b>latent/representation space</b>, not pixels; WM as a cognitive module.</div></div>
-    <div class="step"><div class="yr">2024+</div><div class="ti">Neural engines</div><div class="tx">Interactive generative video as a "world model" (GameNGen, Genie).</div></div>
+  <p class="lead" style="max-width:46ch">A learned internal model that predicts how an environment evolves — given the current state (and optionally an action) it predicts future <b>states, observations, and/or rewards</b> — for <b>planning, control, imagination, or simulation</b>.</p>
+  <div class="tl">
+    <div class="step"><div class="yr">1943</div><div class="ti">Craik</div><div class="tx">A "small-scale model" of reality in the mind.</div></div>
+    <div class="step"><div class="yr">1990</div><div class="ti">Schmidhuber</div><div class="tx">Recurrent model net → makes the world differentiable.</div></div>
+    <div class="step"><div class="yr">1991</div><div class="ti">Sutton · Dyna</div><div class="tx">Plan by "trying things in your head".</div></div>
+    <div class="step"><div class="yr">2018</div><div class="ti">Ha &amp; Schmidhuber</div><div class="tx">V–M–C; train a policy <b>inside a dream</b>.</div></div>
+    <div class="step"><div class="yr">2022</div><div class="ti">LeCun · JEPA</div><div class="tx">Predict in <b>representation space</b>, not pixels.</div></div>
+    <div class="step"><div class="yr">2024+</div><div class="ti">Neural engines</div><div class="tx">Interactive generative video (GameNGen, Genie).</div></div>
   </div>
-  <p class="note">Terminology varies by community: <span class="mono">"the model"</span> (model-based RL) ·
-    <span class="mono">"world model"</span> (Ha/Schmidhuber, Dreamer) ·
-    <span class="mono">"JEPA / world model"</span> (LeCun) ·
-    <span class="mono">"neural game engine / interactive generative video / world simulator"</span> (GameNGen, Genie, Sora).</p>
+  <p class="note">Terminology by community: <span class="mono">"the model"</span> (model-based RL) · <span class="mono">"world model"</span> (Dreamer) · <span class="mono">"JEPA"</span> (LeCun) · <span class="mono">"neural game engine / world simulator"</span> (generative video).</p>
 </section>
 
 <!-- 3 THREE LINEAGES -->
-<section class="slide" data-note="The field splits into three communities that all say 'world model' but mean different things. This framing organizes the rest of the talk.">
+<section data-note="One term, three communities. They differ on WHAT is predicted and WHAT FOR — the two primary taxonomy axes. This framing organizes the rest.">
   <p class="kicker">02 · The Landscape</p>
   <h2>One term, <span class="em">three research lineages</span></h2>
   <div class="cols3">
     <div class="card">
       <h3><span class="dot" style="background:var(--acc)"></span>Model-based RL</h3>
-      <p><b>Goal:</b> learn a compact dynamics model to <b>plan / learn a policy</b>.</p>
-      <p><b>Space:</b> low-dim latent state.<br><b>Scale:</b> tiny (≤200M, single GPU).</p>
-      <div class="flex"><span class="tag b">PlaNet</span><span class="tag b">Dreamer</span><span class="tag b">MuZero</span><span class="tag b">IRIS</span><span class="tag b">TD-MPC2</span></div>
+      <p><b>Goal:</b> compact dynamics model to <b>plan / learn a policy</b>.</p>
+      <p><b>Space:</b> low-dim latent · <b>Scale:</b> tiny (≤200M, single GPU).</p>
+      <div class="flex"><span class="tag b">Dreamer</span><span class="tag b">MuZero</span><span class="tag b">IRIS</span><span class="tag b">TD-MPC2</span></div>
     </div>
     <div class="card">
       <h3><span class="dot" style="background:var(--acc2)"></span>Generative simulation</h3>
-      <p><b>Goal:</b> generate <b>action-conditioned, interactive video</b> — a playable neural engine.</p>
-      <p><b>Space:</b> pixels / image tokens.<br><b>Scale:</b> large (0.5–14B, clusters).</p>
-      <div class="flex"><span class="tag p">GameNGen</span><span class="tag p">Genie</span><span class="tag p">DIAMOND</span><span class="tag p">Sora</span><span class="tag p">Cosmos</span></div>
+      <p><b>Goal:</b> <b>action-conditioned interactive video</b> — a playable neural engine.</p>
+      <p><b>Space:</b> pixels / image tokens · <b>Scale:</b> large (0.5–14B, clusters).</p>
+      <div class="flex"><span class="tag p">GameNGen</span><span class="tag p">Genie</span><span class="tag p">DIAMOND</span><span class="tag p">Cosmos</span></div>
     </div>
     <div class="card">
       <h3><span class="dot" style="background:var(--ok)"></span>Representation models</h3>
       <p><b>Goal:</b> predict <b>future representations</b> — no pixel reconstruction.</p>
-      <p><b>Space:</b> abstract latent.<br><b>Scale:</b> efficient (no decoder).</p>
+      <p><b>Space:</b> abstract latent · <b>Scale:</b> efficient (no decoder).</p>
       <div class="flex"><span class="tag g">I-JEPA</span><span class="tag g">V-JEPA 2</span><span class="tag g">DINO-WM</span></div>
     </div>
   </div>
-  <p class="note">These lineages differ on <b>what is predicted</b> (reward/value vs. pixels vs. embeddings) and <b>what it is for</b>
-    (control vs. simulation vs. representation) — the two primary taxonomy axes.</p>
+  <p class="note">They differ on <b>what is predicted</b> (reward/value vs. pixels vs. embeddings) and <b>what it is for</b> (control vs. simulation vs. representation).</p>
 </section>
 
-<!-- 4 TAXONOMY -->
-<section class="slide" data-note="Six axes used to classify world models. Read each as a spectrum with example models at the poles.">
+<!-- 4 TAXONOMY (FIXED) -->
+<section data-note="Taxonomy axes. KEY CORRECTION: prediction space is binary (observation vs latent). 'Latent state' (Dreamer/IRIS, reconstruction-anchored) and 'representation' (JEPA, no decoder) are both latent — the difference is the OBJECTIVE, not the space.">
   <p class="kicker">03 · Taxonomy</p>
-  <h2>Six axes that classify a world model</h2>
+  <h2>Axes that classify a world model</h2>
   <div class="axis">
     <div class="lab">Prediction space</div>
-    <div class="axrow"><span class="pole">Pixels <span class="ex">GameNGen · Genie</span></span><span class="pole">Latent state <span class="ex">Dreamer · IRIS</span></span><span class="pole">Representation <span class="ex">JEPA · DINO-WM</span></span></div>
-    <div class="lab">Purpose</div>
-    <div class="axrow"><span class="pole">Planning / control <span class="ex">MuZero</span></span><span class="pole">Generative simulation <span class="ex">Genie</span></span><span class="pole">Representation learning <span class="ex">V-JEPA</span></span></div>
+    <div class="axrow fixed"><span>Observation / pixel space<span class="ex">GameNGen · Genie · DIAMOND</span></span><span>Latent space<span class="ex">Dreamer · IRIS · MuZero · JEPA</span></span></div>
     <div class="lab">Backbone</div>
-    <div class="axrow"><span class="pole">RNN / RSSM <span class="ex">PlaNet</span></span><span class="pole">Transformer (AR tokens) <span class="ex">IRIS · Genie</span></span><span class="pole">Diffusion <span class="ex">DIAMOND</span></span><span class="pole">SSM (Mamba) <span class="ex">emerging</span></span></div>
-    <div class="lab">Stochasticity</div>
-    <div class="axrow"><span class="pole">Deterministic <span class="ex">MuZero dynamics</span></span><span class="pole">Stochastic latent-variable <span class="ex">RSSM</span></span></div>
+    <div class="axrow"><span>RNN / RSSM<span class="ex">PlaNet</span></span><span>Transformer (AR tokens)<span class="ex">IRIS · Genie</span></span><span>Diffusion<span class="ex">DIAMOND</span></span><span>SSM (Mamba)<span class="ex">emerging</span></span></div>
     <div class="lab">Controllability</div>
-    <div class="axrow"><span class="pole">Action-conditioned <span class="ex">Dreamer · GameNGen</span></span><span class="pole">Latent / inferred actions <span class="ex">Genie</span></span><span class="pole">Unconditioned <span class="ex">passive video</span></span></div>
+    <div class="axrow"><span>Action-conditioned<span class="ex">Dreamer · GameNGen</span></span><span>Latent / inferred actions<span class="ex">Genie</span></span><span>Unconditioned<span class="ex">passive video</span></span></div>
     <div class="lab">Data regime</div>
-    <div class="axrow"><span class="pole">Online — learns while acting <span class="ex">Dreamer · DayDreamer</span></span><span class="pole">Offline — fixed corpus <span class="ex">Genie · GameNGen</span></span></div>
+    <div class="axrow"><span>Online — learns while acting<span class="ex">Dreamer · DayDreamer</span></span><span>Offline — fixed corpus<span class="ex">Genie · GameNGen</span></span></div>
   </div>
+  <p class="note fix"><b>Correction (verified):</b> a latent space is not one thing. Dreamer (RSSM) &amp; IRIS predict latents trained <b>with a pixel decoder</b> (loss = recon + KL); JEPA / DINO-WM predict latents with <b>no decoder, no reconstruction</b>. "Latent state" vs "representation" is a difference of <b>objective</b> (next slide), not a third prediction space.</p>
 </section>
 
 <!-- 5 OBJECTIVES -->
-<section class="slide" data-note="The five objective-function families. The choice of objective is the single biggest lever on cost and capability.">
-  <p class="kicker">04 · Prediction Patterns &amp; Objective Functions</p>
-  <h2>Five objective families</h2>
+<section data-note="Five objective families. This is where the latent-state vs representation distinction actually lives: reconstruction (recon-anchored latent) vs latent self-prediction (representation, no decoder).">
+  <p class="kicker">04 · Prediction Patterns &amp; Objectives</p>
+  <h2>Five objective families <span style="font-size:.5em;color:var(--dim)">— the key design choice</span></h2>
   <div class="fam">
     <div class="f"><div class="h">Reconstruction (VAE/ELBO)<small>PlaNet · Dreamer V1–V3</small></div>
-      <div class="d">Maximize a variational bound: <code>reconstruction + KL</code> (DreamerV3 adds symlog, KL balancing, free bits). Learns latents by regenerating observations.</div></div>
+      <div class="d"><code>reconstruction + KL</code> — learns a latent by regenerating observations (a <b>reconstruction-anchored</b> latent).</div></div>
     <div class="f"><div class="h">Latent self-prediction<small>JEPA · V-JEPA · DINO-WM</small></div>
-      <div class="d">Predict the <b>embedding</b> of the target from context: <code>‖pred − sg(target)‖</code> in latent space. No decoder, no pixel loss → needs <b>collapse prevention</b> (EMA target / VICReg).</div></div>
+      <div class="d"><code>‖predict − sg(target)‖</code> in latent space — <b>no decoder, no pixel loss</b> (the "representation" route); needs collapse prevention (EMA / VICReg).</div></div>
     <div class="f"><div class="h">Autoregressive token NLL<small>IRIS · TWM · Genie · iVideoGPT</small></div>
-      <div class="d">VQ-tokenize frames, then a Transformer maximizes <code>−log p(next token | past, action)</code>. Dynamics learning becomes sequence modeling.</div></div>
+      <div class="d">VQ-tokenize frames, then <code>−log p(next token | past, action)</code>. Dynamics = sequence modeling.</div></div>
     <div class="f"><div class="h">Diffusion / denoising<small>DIAMOND · GameNGen · Oasis · Cosmos</small></div>
-      <div class="d">Train a denoiser to reverse a noising process and produce the next frame/latent conditioned on past frames + action. High visual fidelity.</div></div>
+      <div class="d">Denoise the next frame/latent conditioned on past frames + action. High visual fidelity.</div></div>
     <div class="f"><div class="h">Value-equivalent<small>MuZero · EfficientZero · TD-MPC2</small></div>
-      <div class="d">Predict <b>no observations</b> — only <code>reward + value + policy</code> (or latent consistency). The model must only be accurate for <i>planning</i>.</div></div>
+      <div class="d">Predict <b>no pixels</b> — only <code>reward + value + policy</code> (MuZero) or <code>latent consistency + reward + value</code> (TD-MPC2).</div></div>
   </div>
 </section>
 
-<!-- 6 INPUTS OUTPUTS -->
-<section class="slide" data-note="What goes in, what comes out. The output target is essentially the objective family from the previous slide.">
+<!-- 6 INPUTS / OUTPUTS -->
+<section data-note="What goes in / out. The output target IS the objective family. Cost ordering: reward/value < latent < representation < pixels.">
   <p class="kicker">05 · Inputs &amp; Outputs</p>
   <h2>What goes in, what comes out</h2>
   <div class="cols">
     <div class="card">
       <h3>Inputs</h3>
       <ul>
-        <li><b>Observations</b> — pixels (64×64 → 720p), proprioception, depth, multi-camera, or text.</li>
-        <li><b>Actions / control</b> — given discrete or continuous (Dreamer, MuZero); <b>latent / inferred</b> with no labels (Genie); keyboard+mouse (GameNGen, Oasis); <b>text "world events"</b> (Genie-3).</li>
+        <li><b>Observations</b> — pixels (64×64 → 720p), proprioception, depth, multi-camera, text.</li>
+        <li><b>Actions / control</b> — given discrete/continuous (Dreamer, MuZero); <b>latent / inferred, no labels</b> (Genie); keyboard+mouse (GameNGen, Oasis); <b>text "world events"</b> (Genie-3).</li>
         <li><b>Context</b> — a window of past frames/latents (e.g. GameNGen: last 64 frames + 64 actions).</li>
       </ul>
     </div>
     <div class="card">
-      <h3>Outputs (= the prediction target)</h3>
+      <h3>Outputs <span style="font-size:.7em;color:var(--dim);font-weight:400">(= the prediction target)</span></h3>
       <ul>
-        <li><b>Next observation</b> — RGB frames at a resolution &amp; FPS (generative engines).</li>
-        <li><b>Next latent state</b> — compact code for imagination &amp; policy learning (Dreamer, IRIS).</li>
-        <li><b>Reward / value / policy</b> — value-equivalent models, no pixels (MuZero, TD-MPC2).</li>
+        <li><b>Next observation</b> — RGB frames at some resolution &amp; FPS (generative engines).</li>
+        <li><b>Next latent state</b> — compact code for imagination + policy (Dreamer, IRIS).</li>
+        <li><b>Reward / value / policy</b> — value-equivalent, no pixels (MuZero, TD-MPC2).</li>
         <li><b>Future representation</b> — an embedding to plan against (JEPA, DINO-WM).</li>
       </ul>
     </div>
   </div>
-  <p class="note"><b>Rule of thumb:</b> the cheaper the output (reward/value &lt; latent &lt; representation &lt; pixels), the cheaper the model —
-    but the less directly interpretable / interactive the rollout.</p>
+  <p class="note"><b>Rule of thumb:</b> the cheaper the output (reward/value &lt; latent &lt; representation &lt; pixels), the cheaper the model — but the less directly interactive the rollout.</p>
 </section>
 
-<!-- 7 NOTABLE I: MBRL -->
-<section class="slide" data-note="Model-based RL line. Almost all single-GPU. Atari100k (100k steps ≈ 2h human play) is the canonical sample-efficiency yardstick; superhuman mean achieved by EfficientZero, DreamerV3, Δ-IRIS, EfficientZero-V2.">
+<!-- 7 NOTABLE: RL -->
+<section data-note="Model-based RL line — almost all single-GPU. Atari100k (100k steps ≈ 2h human play) is the academic-scale sample-efficiency yardstick; mean>1.0 = superhuman. Click a model to open its paper.">
   <p class="kicker">06 · Notable Models I — Model-Based RL</p>
   <h2>Latent-dynamics models for planning</h2>
   <table>
-    <thead><tr><th>Model</th><th>Year</th><th>Backbone</th><th>Params</th><th>Objective</th><th>Train cost</th><th>Atari100k / headline</th></tr></thead>
+    <thead><tr><th>Model</th><th>Year</th><th>Backbone</th><th>Objective</th><th>Train cost</th><th>Atari100k / headline</th></tr></thead>
     <tbody>
-      <tr><td><b>PlaNet</b></td><td>2019</td><td>RSSM (GRU)</td><td>n/r</td><td>recon + KL</td><td>1×V100, 10–20h</td><td>≈D4PG with 40–500× less data (DMC)</td></tr>
-      <tr><td><b>Dreamer V1→V3</b></td><td>'20–'23</td><td>RSSM</td><td>8–200M</td><td>recon + reward + KL</td><td>1×V100; Minecraft 17 GPU-days</td><td>V3: mean <b>1.12</b>; 1st diamond from scratch</td></tr>
-      <tr><td><b>MuZero</b></td><td>2020</td><td>ResNet + MCTS</td><td>n/r</td><td>reward+value+policy</td><td>TPUs, ~1M batches</td><td>SOTA Atari/Go/chess (200M regime)</td></tr>
-      <tr><td><b>EfficientZero</b></td><td>2021</td><td>MuZero + consistency</td><td>n/r</td><td>+ self-sup consistency</td><td>4 GPU × 7h / game</td><td>1st superhuman: mean <b>1.94</b></td></tr>
-      <tr><td><b>TD-MPC2</b></td><td>2024</td><td>implicit MLP (decoder-free)</td><td>1–317M</td><td>consistency+reward+TD</td><td>317M: 33 GPU-days (3090)</td><td>80 tasks, one config; &gt;DreamerV3</td></tr>
-      <tr><td><b>IRIS</b></td><td>2023</td><td>VQ + GPT</td><td>~small</td><td>token NLL</td><td>8×A100, ~3.5 GPU-days/game</td><td>mean <b>1.05</b>, 10/26 superhuman</td></tr>
-      <tr><td><b>TWM</b></td><td>2023</td><td>Transformer-XL</td><td>21.6M</td><td>token CE + AC</td><td>1×A100, ~10h</td><td>mean 0.96, 17/26 superhuman</td></tr>
-      <tr><td><b>Δ-IRIS</b></td><td>2024</td><td>Δ-tokens + transformer</td><td>25M</td><td>delta token NLL</td><td>1×A100, ~10× faster than IRIS</td><td>mean <b>1.39</b>; SOTA Crafter</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/1811.04551" target="_blank">PlaNet</a></td><td>2019</td><td>RSSM (GRU)</td><td>recon + KL</td><td>1×V100, 10–20h</td><td>≈D4PG with 40–500× less data</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2301.04104" target="_blank">Dreamer V1→V3</a></td><td>'20–'23</td><td>RSSM</td><td>recon + reward + KL</td><td>1×V100; Minecraft 17 GPU-days</td><td>V3 mean <b>1.12</b>; 1st diamond from scratch</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/1911.08265" target="_blank">MuZero</a></td><td>2020</td><td>ResNet + MCTS</td><td>reward+value+policy</td><td>TPUs, ~1M batches</td><td>SOTA Atari/Go/chess (200M regime)</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2111.00210" target="_blank">EfficientZero</a></td><td>2021</td><td>MuZero + consistency</td><td>+ self-sup consistency</td><td>4 GPU × 7h / game</td><td>1st superhuman: mean <b>1.94</b></td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2310.16828" target="_blank">TD-MPC2</a></td><td>2024</td><td>implicit MLP (decoder-free)</td><td>consistency+reward+TD</td><td>317M: 33 GPU-days (3090)</td><td>80 tasks, one config; &gt;DreamerV3</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2209.00588" target="_blank">IRIS</a></td><td>2023</td><td>VQ + GPT</td><td>recon + token NLL</td><td>8×A100, ~3.5 GPU-days/game</td><td>mean <b>1.05</b>, 10/26 superhuman</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2406.19320" target="_blank">Δ-IRIS</a></td><td>2024</td><td>Δ-tokens + transformer (25M)</td><td>delta token NLL</td><td>1×A100, ~10× faster than IRIS</td><td>mean <b>1.39</b>; SOTA Crafter</td></tr>
     </tbody>
   </table>
-  <p class="note">This whole family runs on <b>1–8 GPUs</b>. It is where "academic-scale world models" already live. <span class="mono">n/r = not reported in the primary paper.</span></p>
+  <p class="note">This whole family runs on <b>1–8 GPUs</b> — where "academic-scale world models" already live. <span class="mono">mean ≥ 1.0 = above human on Atari100k.</span></p>
 </section>
 
-<!-- 8 NOTABLE II: GENERATIVE -->
-<section class="slide" data-note="Generative / neural game engines. Note the disclosure gap: Genie-2/3 and Sora are blog-only — no params, data, or compute. Real-time interactive ones noted.">
-  <p class="kicker">07 · Notable Models II — Generative / Neural Game Engines</p>
-  <h2>Interactive generative video</h2>
+<!-- 8 NOTABLE: GENERATIVE + REPRESENTATION -->
+<section data-note="Generative engines (large, pixel-space) + representation models (efficient, no decoder). Disclosure gap: Genie-2/3 and Sora are blog-only. Click to open sources.">
+  <p class="kicker">07 · Notable Models II — Generative Engines &amp; Representation</p>
+  <h2>Neural simulators &amp; the no-decoder route</h2>
   <table>
-    <thead><tr><th>Model</th><th>Year/Org</th><th>Objective</th><th>Params</th><th>Train compute</th><th>Inference</th><th>Notable</th></tr></thead>
+    <thead><tr><th>Model</th><th>Year/Org</th><th>Objective</th><th>Params</th><th>Train compute</th><th>Inference</th></tr></thead>
     <tbody>
-      <tr><td><b>GameNGen</b></td><td>'24 Google</td><td>diffusion (SD-1.4)</td><td>n/r</td><td>128 TPU-v5e, 900M frames</td><td><span class="tag g">~20 FPS</span> 1 TPU</td><td>playable DOOM, 320×240</td></tr>
-      <tr><td><b>Genie</b></td><td>'24 DeepMind</td><td>latent-action + token</td><td><b>10.7B</b></td><td>256 TPU-v5p, 942B tok, 30k h video</td><td>batch</td><td>worlds from <b>unlabeled</b> video (ICML best paper)</td></tr>
-      <tr><td><b>Genie-2 / 3</b></td><td>'24/'25 DeepMind</td><td>AR latent diffusion</td><td class="mono">blog only</td><td class="mono">not reported</td><td><span class="tag g">G3: 24 FPS 720p</span></td><td>3D worlds; G3 minutes-consistent, promptable</td></tr>
-      <tr><td><b>DIAMOND</b></td><td>'24 (NeurIPS)</td><td>diffusion (EDM)</td><td>4.4M / 381M</td><td>CS:GO: 1×RTX4090, 12 d</td><td><span class="tag g">~10 FPS</span> 3090</td><td>Atari100k SOTA <b>1.46</b>; CS:GO engine</td></tr>
-      <tr><td><b>Oasis</b></td><td>'24 Decart</td><td>latent diffusion</td><td>500M (open)</td><td>Minecraft video (scale n/r)</td><td><span class="tag g">20 FPS</span> H100</td><td>open, real-time, playable</td></tr>
-      <tr><td><b>Cosmos</b></td><td>'25 NVIDIA</td><td>diffusion + AR</td><td>4–14B</td><td><b>10k H100 × ~3 mo</b>; 100M clips</td><td>batch (tiered)</td><td>open platform for physical AI</td></tr>
-      <tr><td><b>GAIA-1 / 2</b></td><td>'23/'25 Wayve</td><td>AR-token / flow-match</td><td>9B / 8.4B</td><td>GAIA-1: 96×A100 × 15 d</td><td>batch</td><td>driving; multi-view, controllable</td></tr>
-      <tr><td><b>Sora</b></td><td>'24 OpenAI</td><td>diffusion transformer</td><td class="mono">not reported</td><td class="mono">not reported</td><td>batch</td><td>"world simulator" framing; report only</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2408.14837" target="_blank">GameNGen</a></td><td>'24 Google</td><td>diffusion (SD-1.4)</td><td>n/r</td><td>128 TPU-v5e, 900M frames</td><td><span class="tag g">~20 FPS</span> playable DOOM</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2402.15391" target="_blank">Genie</a></td><td>'24 DeepMind</td><td>latent-action + token</td><td><b>10.7B</b></td><td>256 TPU-v5p, 942B tok, 30k h</td><td>batch · worlds from <b>unlabeled</b> video</td></tr>
+      <tr><td><a href="https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/" target="_blank">Genie-3</a></td><td>'25 DeepMind</td><td>AR (undisclosed)</td><td class="mono">blog only</td><td class="mono">not reported</td><td><span class="tag g">24 FPS 720p</span> real-time</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2405.12399" target="_blank">DIAMOND</a></td><td>'24 NeurIPS</td><td>diffusion (EDM)</td><td>4.4M / 381M</td><td>CS:GO: 1×RTX4090, 12 d</td><td><span class="tag g">~10 FPS</span> · Atari100k <b>1.46</b></td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2501.03575" target="_blank">Cosmos</a></td><td>'25 NVIDIA</td><td>diffusion + AR</td><td>4–14B</td><td><b>10k H100 × ~3 mo</b></td><td>batch · physical-AI platform</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2309.17080" target="_blank">GAIA-1</a></td><td>'23 Wayve</td><td>AR-token + diffusion dec.</td><td>9B</td><td>96×A100 × 15 d</td><td>batch · driving</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2506.09985" target="_blank">V-JEPA 2</a></td><td>'25 Meta</td><td><b>latent self-prediction</b></td><td>1.2B</td><td>&lt;62h robot post-train</td><td><b>zero-shot</b> robot planning · no decoder</td></tr>
+      <tr><td><a href="https://arxiv.org/abs/2411.04983" target="_blank">DINO-WM</a></td><td>'24</td><td><b>frozen-DINOv2 latent</b></td><td>small</td><td>latent-space only</td><td>zero-shot planning · no decoder</td></tr>
     </tbody>
   </table>
-  <p class="note"><span class="tag w">Disclosure gap</span> Genie-2/3, Sora reveal no params / data / compute — treat specs as capability claims, not engineering numbers.</p>
+  <p class="note"><span class="tag w">Disclosure gap</span> Genie-2/3, <a href="https://openai.com/index/video-generation-models-as-world-simulators/" target="_blank">Sora</a> publish no params/data/compute — treat specs as capability claims, not engineering numbers.</p>
 </section>
 
-<!-- 9 NOTABLE III: JEPA -->
-<section class="slide" data-note="Representation / non-reconstructive world models. The 'no decoder' route — directly relevant to efficiency. V-JEPA 2 plans on a real robot zero-shot; DINO-WM plans in frozen DINOv2 space.">
-  <p class="kicker">08 · Notable Models III — Representation (JEPA) Models</p>
-  <h2>Predict representations, not pixels</h2>
-  <div class="cols">
-    <div class="card">
-      <h3>The idea</h3>
-      <p>Predict the <b>embedding</b> of a future/masked target from context. <b>No decoder, no reconstruction loss</b> — the model never regenerates imperceptible pixel detail, lowering compute and ignoring unpredictable noise.</p>
-      <p>Requires <b>collapse prevention</b>: EMA target encoder + stop-gradient, or variance/covariance regularization (VICReg).</p>
-      <p class="note">Closest fit to the "tiny world model" thesis: capability without a generative pixel decoder.</p>
-    </div>
-    <div class="card">
-      <h3>Milestones</h3>
-      <ul>
-        <li><b>I-JEPA</b> (2023) — masked-image latent prediction; ViT-H trained on <span class="mono">16×A100, &lt;72h</span>.</li>
-        <li><b>V-JEPA</b> (2024) — feature prediction on ~2M videos; 81.9% Kinetics-400.</li>
-        <li><b>V-JEPA 2</b> (2025) — <b>1.2B</b> video WM; action-conditioned variant post-trained on <b>&lt;62h</b> robot video → <b>zero-shot</b> pick-and-place planning.</li>
-        <li><b>DINO-WM</b> (2024) — world model in <b>frozen DINOv2</b> latent space; task-agnostic zero-shot planning via latent rollouts.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- 10 BENCHMARKS -->
-<section class="slide" data-note="How world models are evaluated. RL side: sample efficiency + capability. Generative side: fidelity + controllability + consistency.">
-  <p class="kicker">09 · Evaluation</p>
-  <h2>How are world models <span class="em">measured</span>?</h2>
-  <div class="cols">
-    <div class="card">
-      <h3><span class="dot" style="background:var(--acc)"></span>Control / RL benchmarks</h3>
-      <ul>
-        <li><b>Atari 100k</b> — 26 games, 100k steps (~2h play). The canonical <b>sample-efficiency</b> / academic-scale yardstick.</li>
-        <li><b>DM Control Suite</b> — continuous control from state or pixels (0–1000/task).</li>
-        <li><b>Crafter</b> — 2D survival; 22 achievements measure broad capability cheaply.</li>
-        <li><b>Minecraft (diamond)</b> — open-ended, long-horizon, sparse reward.</li>
-        <li><b>Procgen</b> — 16 procedural games; isolates <b>generalization</b> (train→test gap).</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3><span class="dot" style="background:var(--acc2)"></span>Generative-video metrics</h3>
-      <ul>
-        <li><b>Visual fidelity</b> — FID (per frame); <b>FVD</b> (Fréchet Video Distance) over I3D spatiotemporal features — captures quality <i>and</i> dynamics; lower is better.</li>
-        <li><b>Action-controllability</b> — does the next frame respond correctly to the input action?</li>
-        <li><b>Long-horizon consistency</b> — does the rollout stay coherent over many seconds without drift?</li>
-      </ul>
-      <p class="note">No single metric is agreed upon for "is this a good world model" — a recognized open problem.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 11 TRAINING COST -->
-<section class="slide" data-note="The headline cost story: 6 orders of magnitude in training compute. Bars are verified GPU-hours where wall-clock is reported. TPU systems shown separately. This is the core argument for why 'tiny' is a real research gap.">
-  <p class="kicker">10 · Training Cost</p>
+<!-- 9 TRAINING COST -->
+<section data-note="Headline cost story: ~6 orders of magnitude in training compute. Bars = verified GPU-hours where wall-clock reported. TPU systems noted separately (not directly comparable).">
+  <p class="kicker">08 · Training Cost</p>
   <h2>Training compute spans <span class="em">~6 orders of magnitude</span></h2>
   <div class="chart">
     <div class="crow"><div class="nm">Ha &amp; Schmidhuber '18<small>1 GPU, hours</small></div><div class="track"><div class="fill tiny" style="width:13%">~10¹ GPU-h</div></div></div>
@@ -357,159 +271,67 @@ html[data-theme="light"] .fill{color:#fff}
     <div class="crow"><div class="nm">NVIDIA Cosmos '25<small>10,000×H100, ~3 mo</small></div><div class="track"><div class="fill ind" style="width:92%">~2×10⁷ GPU-h</div></div></div>
   </div>
   <div class="scale"><div></div><div class="ticks"><span>10⁰</span><span>10¹</span><span>10²</span><span>10³</span><span>10⁴</span><span>10⁵</span><span>10⁶</span><span>10⁷</span><span>10⁸</span></div></div>
-  <p class="note">Log scale, illustrative — TPU/GPU not directly comparable; some wall-clocks <span class="mono">not reported</span>
-    (GameNGen: 128 TPU-v5e; Genie: 256 TPU-v5p). <b>Params</b> echo the gap: <b>&lt;1M–200M</b> (tiny) vs <b>9–14B</b> (industrial).
-    <b>Data</b>: self-collected rollouts vs 200k–20M hours of video.</p>
+  <p class="note">Log scale, illustrative — TPU/GPU not directly comparable; some wall-clocks <span class="mono">not reported</span> (GameNGen 128 TPU-v5e; Genie 256 TPU-v5p). <b>Params:</b> &lt;1M–200M (tiny) vs 9–14B (industrial). <b>Data:</b> self-collected rollouts vs 200k–20M h video.</p>
 </section>
 
-<!-- 12 INFERENCE COST -->
-<section class="slide" data-note="Inference splits into three regimes. Crucial: search-based planners (MuZero, TD-MPC) pay heavily at inference even if cheap to train; generative engines pay per frame.">
-  <p class="kicker">11 · Inference Cost</p>
-  <h2>Three inference regimes</h2>
-  <div class="cols3">
-    <div class="card">
-      <h3><span class="dot" style="background:var(--ok)"></span>Amortized policy</h3>
-      <p><b>Cheapest.</b> A trained policy acts in one forward pass; the world model is only used during training (imagination).</p>
-      <div class="flex"><span class="tag g">Dreamer</span><span class="tag g">IRIS</span><span class="tag g">TWM</span></div>
-      <p class="small" style="margin-top:.6rem">→ real-time control, negligible per-step cost.</p>
-    </div>
-    <div class="card">
-      <h3><span class="dot" style="background:var(--warn)"></span>Search / planning</h3>
-      <p><b>Heavy at inference.</b> Roll the model out many times per action — even if training is cheap.</p>
-      <div class="flex"><span class="tag w">MuZero MCTS 50–800</span><span class="tag w">TD-MPC2 MPPI 512</span><span class="tag w">PlaNet CEM 1000×10</span></div>
-      <p class="small" style="margin-top:.6rem">→ latency scales with #simulations.</p>
-    </div>
-    <div class="card">
-      <h3><span class="dot" style="background:var(--acc2)"></span>Generative rollout</h3>
-      <p><b>Per-frame generation cost.</b> Diffusion/AR steps per frame; real-time only with few steps / distillation.</p>
-      <div class="flex"><span class="tag p">GameNGen 20 FPS</span><span class="tag p">Oasis 20 FPS</span><span class="tag p">DIAMOND 10 FPS</span><span class="tag p">Genie-3 24 FPS</span></div>
-      <p class="small" style="margin-top:.6rem">→ Cosmos / GAIA / Sora are batch, not interactive.</p>
-    </div>
+<!-- 10 INFERENCE + EFFICIENCY -->
+<section data-note="Inference splits 3 ways; cheap-to-train ≠ cheap-to-run (search planners). Then the efficiency levers — the toolbox for 'tiny'.">
+  <p class="kicker">09 · Inference Cost &amp; Efficiency Levers</p>
+  <h2>Inference regimes → efficiency toolbox</h2>
+  <div class="cols3" style="margin-bottom:8px">
+    <div class="card"><h3><span class="dot" style="background:var(--ok)"></span>Amortized policy</h3><p><b>Cheapest.</b> Act in one forward pass; model used only in training.</p><div class="flex"><span class="tag g">Dreamer</span><span class="tag g">IRIS</span></div></div>
+    <div class="card"><h3><span class="dot" style="background:var(--warn)"></span>Search / planning</h3><p><b>Heavy per step</b>, even if cheap to train.</p><div class="flex"><span class="tag w">MuZero MCTS</span><span class="tag w">TD-MPC2 MPPI</span></div></div>
+    <div class="card"><h3><span class="dot" style="background:var(--acc2)"></span>Generative rollout</h3><p><b>Per-frame</b> diffusion/AR; real-time only with few steps.</p><div class="flex"><span class="tag p">GameNGen 20fps</span><span class="tag p">DIAMOND 10fps</span></div></div>
   </div>
-  <p class="note">Key insight: <b>cheap to train ≠ cheap to run.</b> A value-equivalent model (MuZero) is small but does expensive tree search at every step.</p>
-</section>
-
-<!-- 13 EFFICIENCY -->
-<section class="slide" data-note="The levers that make world models tiny — the toolbox for this project. Map each lever to an exemplar.">
-  <p class="kicker">12 · Efficiency Levers</p>
-  <h2>What makes a world model <span class="em">tiny</span>?</h2>
+  <p class="note" style="margin:0 0 8px"><b>Key insight:</b> cheap to train ≠ cheap to run — a value-equivalent model (MuZero) is small but does expensive tree search at every step.</p>
   <div class="grid2">
-    <div class="card"><h3>Latent-space dynamics</h3><p>Model dynamics in a compact recurrent state; predict pixels only for the loss. <span class="tag b">RSSM / Dreamer</span></p></div>
-    <div class="card"><h3>Discrete tokens + small transformer</h3><p>VQ a frame into a few tokens → tiny sequence model. <span class="tag b">IRIS · Δ-IRIS (4 tok/frame)</span></p></div>
-    <div class="card"><h3>No reconstruction</h3><p>Predict embeddings, drop the decoder &amp; pixel loss. <span class="tag g">JEPA · DINO-WM</span></p></div>
-    <div class="card"><h3>Imagination + replay</h3><p>Train the policy on synthetic rollouts → few real interactions. <span class="tag b">Atari100k regime</span></p></div>
-    <div class="card"><h3>Self-supervised / consistency loss</h3><p>Extract more signal per sample. <span class="tag b">EfficientZero</span></p></div>
-    <div class="card"><h3>Distillation · synthetic data · curriculum</h3><p>Compress a big model into a fast one; generate data. <span class="tag p">Cosmos-Nano · GameNGen distill</span></p></div>
+    <div class="card"><p><b>Latent-space dynamics</b> (RSSM) — Dreamer · <b>tokens + small transformer</b> — Δ-IRIS (4 tok/frame).</p></div>
+    <div class="card"><p><b>No reconstruction</b> (drop decoder) — JEPA, DINO-WM · <b>self-sup consistency</b> — EfficientZero.</p></div>
+    <div class="card"><p><b>Imagination + replay</b> for sample efficiency — Atari100k regime.</p></div>
+    <div class="card"><p><b>Distillation / synthetic data</b> · <b>SSM (Mamba)</b> backbones — long context, near-linear cost.</p></div>
   </div>
-  <p class="note">Architectural angle: <b>state-space models (S4 / Mamba)</b> give long-context rollouts at near-linear cost — an open, under-explored lever for tiny WMs.</p>
 </section>
 
-<!-- 14 SYNTHESIS -->
-<section class="slide" data-note="Synthesis. Neutral observation: a cluster of capable models sits at single-GPU / ≤200M params and still sets sample-efficiency SOTA — that's the academic-scale frontier this project can push.">
-  <p class="kicker">13 · Synthesis</p>
-  <h2>Where the <span class="em">academic-scale frontier</span> sits</h2>
-  <div class="cols">
-    <div class="card kpi">
-      <p class="kicker" style="color:var(--ok)">Tiny &amp; capable — single GPU</p>
-      <div class="bignum ok">≤ 200M params</div>
-      <p style="margin-top:.5rem"><b>DreamerV3, IRIS, Δ-IRIS, DIAMOND-Atari, TD-MPC2, DINO-WM, V-JEPA 2.</b> Reach superhuman Atari100k, solve Minecraft diamond, plan on real robots — on <b>1–8 GPUs</b>.</p>
-    </div>
-    <div class="card kpi">
-      <p class="kicker" style="color:var(--hot)">Industrial — clusters</p>
-      <div class="bignum p">9–14B params</div>
-      <p style="margin-top:.5rem"><b>Genie, GAIA, Cosmos, Sora.</b> Photorealistic, open-domain, interactive — but <b>10⁴–10⁷ GPU-hours</b> and proprietary video corpora; many specs undisclosed.</p>
-    </div>
-  </div>
-  <ul style="margin-top:1rem">
-    <li><b>Capability is not monopolized by scale:</b> the strongest <i>sample-efficiency</i> results come from sub-200M, single-GPU models.</li>
-    <li><b>The gap is fidelity &amp; open-domain generality</b> — exactly what costs orders of magnitude more.</li>
-    <li><b>Promising tiny levers:</b> no-reconstruction (JEPA), context-aware tokenization (Δ-IRIS), SSM backbones, distillation from large neural engines.</li>
-  </ul>
-</section>
-
-<!-- 15 TAKEAWAYS + REFS -->
-<section class="slide" data-note="Close. Five neutral takeaways, then references. Invite discussion on which lineage/benchmark to target first.">
-  <p class="kicker">14 · Takeaways &amp; References</p>
+<!-- 11 TAKEAWAYS + REFS -->
+<section data-note="Close. Five neutral takeaways + clickable references. Invite discussion: which lineage / benchmark / efficiency lever to target first.">
+  <p class="kicker">10 · Takeaways &amp; References</p>
   <h2>Takeaways</h2>
-  <ul style="font-size:1.04rem">
-    <li><b>One term, three communities</b> — model-based RL, generative simulation, and representation models all say "world model" but predict different things.</li>
-    <li><b>Objective = the key design choice</b> — recon · latent-prediction · AR-token · diffusion · value-equivalent, in roughly increasing pixel-fidelity and cost.</li>
-    <li><b>Cost spans ~6 orders of magnitude</b> in compute and ~4 in parameters; and <b>cheap-to-train ≠ cheap-to-run</b> (search planners).</li>
-    <li><b>Meaningful capability is already academic-scale</b> — Atari100k, DMC, Crafter, even Minecraft, on single GPUs.</li>
-    <li><b>Open question for this project:</b> which lineage &amp; benchmark to target, and which efficiency lever (no-decoder JEPA? tokenized transformer? SSM?) to push.</li>
+  <ul>
+    <li><b>One term, three communities</b> — RL, generative simulation, and representation models predict different things.</li>
+    <li><b>Objective = the key design choice</b> — recon · latent-prediction · AR-token · diffusion · value-equivalent. ("Latent state" vs "representation" is an <b>objective</b> distinction, not a separate space.)</li>
+    <li><b>Cost spans ~6 orders of magnitude</b> in compute, ~4 in params; and <b>cheap-to-train ≠ cheap-to-run</b>.</li>
+    <li><b>Meaningful capability is already academic-scale</b> — superhuman Atari100k, Minecraft diamond, real-robot planning, all on single GPUs.</li>
+    <li><b>Open question:</b> which lineage &amp; benchmark to target, and which efficiency lever (no-decoder JEPA? tokenized transformer? SSM?) to push.</li>
   </ul>
-  <p class="kicker" style="margin-top:1rem">Selected primary sources</p>
+  <p class="kicker" style="margin-top:14px">Selected primary sources <span style="text-transform:none;color:var(--dim);font-weight:400">— click to open</span></p>
   <div class="refs">
-    <p>Ha &amp; Schmidhuber. <b>World Models</b>. NeurIPS 2018. <span class="mono">arXiv:1803.10122</span></p>
-    <p>LeCun. <b>A Path Towards Autonomous Machine Intelligence</b>. 2022.</p>
-    <p>Hafner et al. <b>PlaNet</b>. ICML 2019. <span class="mono">arXiv:1811.04551</span></p>
-    <p>Hafner et al. <b>DreamerV3</b>. Nature 2025. <span class="mono">arXiv:2301.04104</span></p>
-    <p>Schrittwieser et al. <b>MuZero</b>. Nature 2020. <span class="mono">arXiv:1911.08265</span></p>
-    <p>Ye et al. <b>EfficientZero</b>. NeurIPS 2021. <span class="mono">arXiv:2111.00210</span></p>
-    <p>Hansen et al. <b>TD-MPC2</b>. ICLR 2024. <span class="mono">arXiv:2310.16828</span></p>
-    <p>Micheli et al. <b>IRIS</b>. ICLR 2023. <span class="mono">arXiv:2209.00588</span></p>
-    <p>Micheli et al. <b>Δ-IRIS</b>. ICML 2024. <span class="mono">arXiv:2406.19320</span></p>
-    <p>Alonso et al. <b>DIAMOND</b>. NeurIPS 2024. <span class="mono">arXiv:2405.12399</span></p>
-    <p>Valevski et al. <b>GameNGen</b>. 2024. <span class="mono">arXiv:2408.14837</span></p>
-    <p>Bruce et al. <b>Genie</b>. ICML 2024. <span class="mono">arXiv:2402.15391</span></p>
-    <p>NVIDIA. <b>Cosmos</b>. 2025. <span class="mono">arXiv:2501.03575</span></p>
-    <p>Hu et al. <b>GAIA-1</b>. 2023. <span class="mono">arXiv:2309.17080</span></p>
-    <p>Assran et al. <b>V-JEPA 2</b>. 2025. <span class="mono">arXiv:2506.09985</span></p>
-    <p>Zhou et al. <b>DINO-WM</b>. ICML 2025. <span class="mono">arXiv:2411.04983</span></p>
+    <p><a href="https://arxiv.org/abs/1803.10122" target="_blank">Ha &amp; Schmidhuber — World Models</a>, NeurIPS 2018</p>
+    <p><a href="https://arxiv.org/abs/2301.04104" target="_blank">Hafner et al. — DreamerV3</a>, Nature 2025</p>
+    <p><a href="https://arxiv.org/abs/1911.08265" target="_blank">Schrittwieser et al. — MuZero</a>, Nature 2020</p>
+    <p><a href="https://arxiv.org/abs/2111.00210" target="_blank">Ye et al. — EfficientZero</a>, NeurIPS 2021</p>
+    <p><a href="https://arxiv.org/abs/2310.16828" target="_blank">Hansen et al. — TD-MPC2</a>, ICLR 2024</p>
+    <p><a href="https://arxiv.org/abs/2209.00588" target="_blank">Micheli et al. — IRIS</a>, ICLR 2023</p>
+    <p><a href="https://arxiv.org/abs/2406.19320" target="_blank">Micheli et al. — Δ-IRIS</a>, ICML 2024</p>
+    <p><a href="https://arxiv.org/abs/2405.12399" target="_blank">Alonso et al. — DIAMOND</a>, NeurIPS 2024</p>
+    <p><a href="https://arxiv.org/abs/2402.15391" target="_blank">Bruce et al. — Genie</a>, ICML 2024</p>
+    <p><a href="https://arxiv.org/abs/2501.03575" target="_blank">NVIDIA — Cosmos</a>, 2025</p>
+    <p><a href="https://arxiv.org/abs/2506.09985" target="_blank">Assran et al. — V-JEPA 2</a>, 2025</p>
+    <p><a href="https://arxiv.org/abs/2411.04983" target="_blank">Zhou et al. — DINO-WM</a>, ICML 2025</p>
   </div>
-  <p class="note">Full annotated notes, comparison tables, and the complete reference list: <span class="mono">world-models-notes.md</span></p>
+  <p class="foot">Full annotated tables &amp; 37 references → <a href="world-models-notes.md">world-models-notes.md</a></p>
 </section>
 
-</div>
-
-<div id="help"><div class="box">
-  <div><kbd>→</kbd><kbd>Space</kbd> next &nbsp; <kbd>←</kbd> previous</div>
-  <div><kbd>Home</kbd><kbd>End</kbd> first / last slide</div>
-  <div><kbd>t</kbd> toggle light / dark &nbsp; <kbd>f</kbd> fullscreen</div>
-  <div><kbd>o</kbd> speaker notes &nbsp; <kbd>?</kbd> close help</div>
 </div></div>
 
-<div id="bar"></div>
-<div id="brand">World Models · Literature Landscape</div>
-<div class="hint">← → navigate · <b>t</b> theme · <b>f</b> full · <b>?</b> help</div>
-<div id="hud"><b id="cur">1</b> / <span id="tot">15</span></div>
-
+<script src="reveal/reveal.js"></script>
 <script>
-(function(){
-  var slides=[].slice.call(document.querySelectorAll('.slide'));
-  var i=0, n=slides.length;
-  document.getElementById('tot').textContent=n;
-  var bar=document.getElementById('bar'), cur=document.getElementById('cur'), help=document.getElementById('help');
-  function show(k){
-    i=Math.max(0,Math.min(n-1,k));
-    slides.forEach(function(s,j){s.classList.toggle('active',j===i);});
-    bar.style.width=((i)/(n-1)*100)+'%';
-    cur.textContent=i+1;
-    if(location.hash!=='#'+(i+1)) history.replaceState(null,'','#'+(i+1));
-  }
-  function next(){show(i+1);} function prev(){show(i-1);}
-  document.addEventListener('keydown',function(e){
-    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
-    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
-    else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(n-1);}
-    else if(e.key==='t'||e.key==='T'){var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='light'?'dark':'light');}
-    else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen&&document.exitFullscreen();}
-    else if(e.key==='?'){help.classList.toggle('on');}
-    else if(e.key==='o'||e.key==='O'){var s=slides[i],nt=s.getAttribute('data-note');if(nt)alert('Speaker note — slide '+(i+1)+':\n\n'+nt);}
-    else if(e.key==='Escape'){help.classList.remove('on');}
+  Reveal.initialize({
+    width: 1280, height: 720, margin: 0.045,
+    minScale: 0.2, maxScale: 1.6,
+    center: false, hash: true, slideNumber: 'c/t',
+    controls: true, progress: true, transition: 'fade',
+    pdfSeparateFragments: false
   });
-  // click zones (ignore clicks on links/help)
-  document.getElementById('deck').addEventListener('click',function(e){
-    if(e.target.closest('a'))return;
-    if(e.clientX < window.innerWidth*0.32) prev(); else if(e.clientX > window.innerWidth*0.68) next();
-  });
-  // touch swipe
-  var x0=null;
-  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
-  document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50){dx<0?next():prev();}x0=null;});
-  window.addEventListener('hashchange',function(){var k=parseInt(location.hash.slice(1),10);if(k)show(k-1);});
-  var start=parseInt(location.hash.slice(1),10); show(start?start-1:0);
-})();
 </script>
 </body>
 </html>
