@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>World Models — A Simple Introduction</title>
+<link rel="stylesheet" href="reveal/reset.css"/>
+<link rel="stylesheet" href="reveal/reveal.css"/>
+<style>
+:root{
+  --bg:#ffffff; --ink:#16202c; --mut:#3c4a59; --dim:#73818f; --line:#cdd4dc;
+  --head:#eef3f8; --acc:#1f6f8b; --acc2:#2a7d4f;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+.reveal{font-family:var(--sans);font-size:34px;color:var(--ink);background:var(--bg)}
+.reveal .slides{text-align:left}
+.reveal .slides section{top:0 !important;padding:20px 30px}
+.reveal h1{font-size:2.3em;font-weight:800;margin:0}
+.reveal h2{font-size:1.4em;font-weight:700;margin:0 0 .55em;padding-bottom:.18em;border-bottom:3px solid var(--acc);color:var(--ink)}
+.reveal h3{font-size:.8em;font-weight:700;margin:0 0 .3em;color:var(--ink)}
+.reveal p{font-size:.72em;line-height:1.5;color:var(--mut);margin:.4em 0}
+.reveal b,.reveal strong{color:var(--ink)}
+.reveal a{color:var(--acc);text-decoration:underline}
+.reveal ul{font-size:.78em;margin:.3em 0 .3em 1.1em}
+.reveal li{margin:.5em 0;line-height:1.5;color:var(--mut)}
+.reveal li b{color:var(--ink)}
+.big{font-size:.9em !important;color:var(--ink) !important}
+.center{display:flex;flex-direction:column;justify-content:center;height:100%}
+.quote{font-size:.8em;color:var(--ink);border-left:5px solid var(--acc);padding:10px 18px;background:var(--head);margin:.5em 0;line-height:1.5}
+.quote .who{display:block;font-size:.7em;color:var(--dim);margin-top:8px}
+/* flow boxes */
+.flow{display:flex;align-items:center;gap:14px;margin:.6em 0;flex-wrap:wrap}
+.box{background:var(--head);border:2px solid var(--line);border-radius:12px;padding:14px 18px;font-size:.62em;color:var(--ink);font-weight:600;text-align:center;flex:1;min-width:120px}
+.box small{display:block;font-weight:400;color:var(--dim);font-size:.85em;margin-top:4px}
+.box.out{border-color:var(--acc);background:#e9f3f6}
+.arrow{font-size:1.1em;color:var(--acc);font-weight:800}
+/* three cards */
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:.4em}
+.card{background:var(--head);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card .t{font-weight:800;color:var(--acc);font-size:.7em;margin-bottom:.3em}
+.card p{font-size:.62em;margin:.2em 0}
+.reveal table{width:100%;border-collapse:collapse;font-size:.6em;margin:.3em 0}
+.reveal table th,.reveal table td{text-align:left;padding:10px 14px;border:1px solid var(--line);vertical-align:top}
+.reveal table th{background:var(--head);font-weight:700}
+.reveal table td b{color:var(--ink)}
+.note{font-size:.6em;color:var(--mut);margin-top:.6em;border-left:4px solid var(--acc);padding:9px 14px;background:var(--head)}
+.note b{color:var(--ink)}
+.sub{font-size:.55em;color:var(--dim);font-weight:400}
+.reveal .slide-number{background:transparent;color:var(--dim);font-family:var(--mono);font-size:15px}
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- 1 TITLE -->
+<section data-note="Simple intro for undergraduates. Plain words, one idea per slide. We cover: what a world model is, why it matters, Fei-Fei Li's definition and spatial intelligence, and today's main types.">
+  <div class="center">
+    <h1>World Models</h1>
+    <p class="big" style="margin-top:.4em;font-weight:600">A simple introduction</p>
+    <p class="big" style="margin-top:.4em">What they are · why they matter · Fei-Fei Li's view · today's main types</p>
+  </div>
+</section>
+
+<!-- 2 BIG IDEA -->
+<section data-note="The core analogy: a world model is imagination. You already have one. Push a glass off a table - you know it falls and breaks, without trying it.">
+  <h2>The big idea: imagination</h2>
+  <p class="big">You already have a world model in your head.</p>
+  <p>If you push a glass off a table, you <b>know</b> it will fall and break — you do not need to try it. You imagined the result.</p>
+  <p class="big" style="margin-top:.5em">A <b>world model</b> gives an AI the same ability: <b>imagine what happens next.</b></p>
+</section>
+
+<!-- 3 WHAT IT DOES -->
+<section data-note="Concretely: given the current situation and an action, predict the next situation. That is the whole job.">
+  <h2>What a world model does</h2>
+  <p class="big">Given where things are now, and what you do, it predicts what happens next.</p>
+  <div class="flow">
+    <div class="box">Now<small>the current situation</small></div>
+    <div class="arrow">+</div>
+    <div class="box">Action<small>what you do</small></div>
+    <div class="arrow">→</div>
+    <div class="box out">Next<small>what the model predicts</small></div>
+  </div>
+  <p>Repeat this again and again, and the AI can "play out" the future in its head — one step at a time.</p>
+</section>
+
+<!-- 4 WHY USEFUL -->
+<section data-note="Three reasons, kept simple: plan, practice safely in imagination, and understand the world.">
+  <h2>Why is this useful?</h2>
+  <div class="three">
+    <div class="card"><div class="t">1. Plan</div><p>Try several futures in your head, then pick the best action.</p></div>
+    <div class="card"><div class="t">2. Practice safely</div><p>Learn inside the imagination instead of the real world — cheaper and safer (no broken robots).</p></div>
+    <div class="card"><div class="t">3. Understand</div><p>To predict the world well, the model must learn how the world works.</p></div>
+  </div>
+  <p class="note">This is why world models are seen as a path toward AI that truly understands the physical world.</p>
+</section>
+
+<!-- 5 FEI-FEI LI: SPATIAL INTELLIGENCE -->
+<section data-note="Fei-Fei Li's view, emphasized. Her essay From Words to Worlds (Nov 2025). Language alone is not enough; AI needs spatial intelligence - understanding the 3D world.">
+  <h2>Fei-Fei Li: beyond language</h2>
+  <p class="big">Today's chatbots are great with words, but they have never <b>touched</b> the world.</p>
+  <p class="quote">Today's AI models are "eloquent but inexperienced, knowledgeable but ungrounded."
+    <span class="who">— Fei-Fei Li, <i>From Words to Worlds: Spatial Intelligence is AI's Next Frontier</i> (Nov 2025)</span></p>
+  <p>Her answer is <b>spatial intelligence</b>: understanding the <b>3D physical world</b> — the capability that links <b>imagination, perception, and action</b>. She calls it <b>"AI's next frontier."</b></p>
+</section>
+
+<!-- 6 FEI-FEI LI DEFINITION + 3 CAPABILITIES -->
+<section data-note="Her definition of a world model and the three properties she lists verbatim: generative, multimodal, interactive. This is the slide to emphasize.">
+  <h2>Fei-Fei Li's definition of a world model</h2>
+  <p class="quote">A <b>world model</b> is a new type of generative model that can <b>understand, reason about, generate, and interact</b> with complex worlds — worlds that are rich in meaning, physics, geometry, and motion.
+    <span class="who">— Fei-Fei Li (2025), paraphrased from her essay</span></p>
+  <p class="big">She says a world model needs three things:</p>
+  <div class="three">
+    <div class="card"><div class="t">Generative</div><p>It can create worlds that look and behave consistently.</p></div>
+    <div class="card"><div class="t">Multimodal</div><p>It works with images, video, text, actions — not just one input.</p></div>
+    <div class="card"><div class="t">Interactive</div><p>Give it an action, it returns the next state.</p></div>
+  </div>
+</section>
+
+<!-- 7 SPATIAL IN PRACTICE -->
+<section data-note="World Labs and Marble. Spatial world models build real 3D worlds you can walk through, not just 2D video. Marble launched Nov 2025; generates explorable 3D scenes from text/image/video.">
+  <h2>Spatial world models in practice</h2>
+  <p>Fei-Fei Li co-founded <b>World Labs</b> (2024). Their model <b>Marble</b> (2025) builds <b>explorable 3D worlds</b> from a sentence, a picture, or a video — and you can walk through them and export them.</p>
+  <p class="quote">"World models should reconstruct, generate, and simulate 3D worlds, and let humans and agents interact with them."
+    <span class="who">— World Labs</span></p>
+  <p class="big" style="margin-top:.4em">How "spatial" differs from the others:</p>
+  <ul>
+    <li><b>RL world models</b> (Dreamer): a hidden "game sense" that helps an AI player plan.</li>
+    <li><b>2D video models</b> (Sora, Genie): predict the next video frame — can drift over time.</li>
+    <li><b>Spatial models</b> (World Labs): build a real <b>3D place</b> you can move around in, that stays consistent.</li>
+  </ul>
+</section>
+
+<!-- 8 ARCHITECTURES -->
+<section data-note="Today's main types, one plain analogy each. Keep it light - undergrads just need the picture, not the math.">
+  <h2>Today's main types</h2>
+  <table>
+    <thead><tr><th>Type</th><th>In one sentence</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td><b>Recurrent latent</b></td><td>Squeeze the picture into a small code, then predict the next code. (Think in shorthand.)</td><td>Dreamer</td></tr>
+      <tr><td><b>Token transformer</b></td><td>Turn frames into "words" and predict the next one. (Like ChatGPT, but for video.)</td><td>Genie, IRIS</td></tr>
+      <tr><td><b>Diffusion</b></td><td>Start from noise and clean it up into the next frame. (Like developing a photo.)</td><td>Sora, DIAMOND</td></tr>
+      <tr><td><b>No decoder (JEPA)</b></td><td>Predict the <i>idea</i> of the next state, not every pixel. (Predict the gist.)</td><td>JEPA, DINO-WM</td></tr>
+      <tr><td><b>3D / spatial</b></td><td>Build an actual 3D world. (Make a place, not a movie.)</td><td>World Labs (Marble)</td></tr>
+    </tbody>
+  </table>
+  <p class="note">The first four predict <b>2D pictures or codes</b>. The last one (Fei-Fei Li's direction) predicts a <b>3D world</b>.</p>
+</section>
+
+<!-- 9 RECAP -->
+<section data-note="Three sentences to remember. Keep it short.">
+  <h2>Remember three things</h2>
+  <ul class="big">
+    <li>A <b>world model</b> predicts what happens next — it is imagination for AI.</li>
+    <li>It is useful to <b>plan</b>, to <b>practice safely</b>, and to <b>understand the world</b>.</li>
+    <li>Fei-Fei Li's <b>spatial intelligence</b> pushes world models from 2D video to real, explorable <b>3D worlds</b> — what she calls "AI's next frontier".</li>
+  </ul>
+  <p class="note">Source for Fei-Fei Li's quotes: "From Words to Worlds: Spatial Intelligence is AI's Next Frontier" (Nov 2025), and World Labs.</p>
+</section>
+
+</div></div>
+
+<script src="reveal/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1280, height: 720, margin: 0.05,
+    minScale: 0.2, maxScale: 1.8,
+    center: false, hash: true, slideNumber: 'c/t',
+    controls: true, progress: true, transition: 'slide'
+  });
+</script>
+</body>
+</html>
